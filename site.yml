@@ -1,0 +1,8 @@
+---
+- name: Deploy both applications
+  hosts: web
+  become: true
+
+  roles:
+    - app_one
+    - app_two

@@ -1,0 +1,13 @@
+[Unit]
+Description=Application Two
+After=network.target
+
+[Service]
+User=www-data
+WorkingDirectory={{ app_directory }}
+ExecStart=/usr/bin/python3 {{ app_directory }}/app.py
+Environment=APP_PORT={{ app_port }}
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

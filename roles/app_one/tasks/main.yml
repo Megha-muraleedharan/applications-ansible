@@ -1,0 +1,33 @@
+---
+- name: Install Python and Flask
+  apt:
+    name:
+      - python3
+      - python3-flask
+    state: present
+    update_cache: yes
+
+- name: Create application directory
+  file:
+    path: "{{ app_directory }}"
+    state: directory
+    mode: '0755'
+
+- name: Copy App 1 Python code to VM
+  copy:
+    src: app.py
+    dest: "{{ app_directory }}/app.py"
+    mode: '0644'
+
+- name: Install App 1 systemd service
+  template:
+    src: app-one.service.j2
+    dest: /etc/systemd/system/app-one.service
+    mode: '0644'
+  notify: Reload systemd
+
+- name: Enable and start App 1
+  systemd:
+    name: app-one
+    state: started
+    enabled: yes

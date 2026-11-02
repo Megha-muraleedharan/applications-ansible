@@ -1,0 +1,5 @@
+---
+app_name: app_one
+app_port: 5001
+app_message: "Welcome to Application One!"
+app_directory: /opt/app_one
